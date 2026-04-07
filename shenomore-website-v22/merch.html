@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHE NO MORE - Merch Oficial</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/KjRZ2gzD/Logo-SNM-Emblema-2.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple-dark: #1a0a1f;
+            --purple-deep: #2d1b36;
+            --purple-main: #6b2d5b;
+            --purple-accent: #9b4d8b;
+            --purple-light: #c77dbb;
+            --purple-glow: #e4a5d9;
+            --white: #f5f0f5;
+            --gray: #a89fa8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: 
+                linear-gradient(180deg, rgba(26, 10, 31, 0.9) 0%, rgba(26, 10, 31, 0.85) 50%, rgba(26, 10, 31, 0.9) 100%),
+                url('https://i.ibb.co/7dbF2SSy/Wallpaper.png') center/cover no-repeat fixed;
+            color: var(--white);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* ========== HEADER ========== */
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: linear-gradient(to bottom, rgba(26, 10, 31, 0.98), rgba(26, 10, 31, 0.9));
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        header.scrolled { padding: 0.5rem 2rem; background: rgba(26, 10, 31, 0.98); }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .nav-left a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .nav-left a:hover { color: var(--purple-light); }
+        .nav-left svg { width: 18px; height: 18px; stroke: currentColor; fill: none; }
+
+        .logo-center { display: flex; justify-content: center; }
+        .logo-img {
+            height: 50px;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 20px var(--purple-accent));
+        }
+        header.scrolled .logo-img { height: 40px; }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .lang-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .lang-btn {
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            padding: 0.3rem;
+        }
+        .lang-btn:hover { color: var(--purple-light); }
+        .lang-btn.active { color: var(--white); }
+        .lang-divider { color: var(--gray); font-size: 0.8rem; }
+
+        /* ========== HERO MERCH ========== */
+        .merch-hero {
+            padding: 10rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+        }
+        .merch-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(ellipse at center, rgba(107, 45, 91, 0.2) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .merch-hero-content { position: relative; z-index: 1; }
+        .merch-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            letter-spacing: 0.2em;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 40px var(--purple-accent);
+        }
+        .title-logo {
+            display: inline-block;
+            width: 0.85em;
+            height: 0.85em;
+            background: url('https://i.ibb.co/KjRZ2gzD/Logo-SNM-Emblema-2.png') center/contain no-repeat;
+            filter: drop-shadow(0 0 10px var(--purple-accent));
+            vertical-align: middle;
+            margin: 0 -0.05em;
+        }
+        .merch-subtitle {
+            color: var(--gray);
+            font-size: 1.2rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+        .merch-tagline {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--purple-light);
+            letter-spacing: 0.1em;
+        }
+
+        /* ========== PRODUCTOS GRID ========== */
+        .products-section {
+            padding: 2rem 2rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .product-card {
+            background: rgba(26, 10, 31, 0.6);
+            border: 1px solid var(--purple-main);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        .product-card:hover {
+            border-color: var(--purple-light);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(107, 45, 91, 0.4);
+        }
+        .product-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--purple-deep), var(--purple-main));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        .product-gallery {
+            position: absolute;
+            bottom: 0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.4rem;
+            padding: 0.4rem;
+            background: rgba(26, 10, 31, 0.85);
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .product-card:hover .product-gallery {
+            opacity: 1;
+        }
+        .product-gallery .thumb {
+            width: 36px;
+            height: 36px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .product-gallery .thumb:hover,
+        .product-gallery .thumb.active {
+            border-color: var(--purple-light);
+        }
+        .product-placeholder {
+            color: var(--gray);
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 1rem;
+        }
+        .product-placeholder svg {
+            width: 60px;
+            height: 60px;
+            stroke: var(--purple-main);
+            fill: none;
+            margin-bottom: 0.5rem;
+        }
+        .product-badge {
+            position: absolute;
+            top: 1rem; left: 1rem;
+            background: var(--purple-accent);
+            color: var(--white);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+        }
+        .product-badge.low-stock {
+            background: #c9453e;
+        }
+        .product-stock {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 0.8rem;
+        }
+        .product-stock.low {
+            color: #e57373;
+            font-weight: 600;
+        }
+        .product-info {
+            padding: 1.5rem;
+        }
+        .product-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--purple-light);
+            margin-bottom: 1rem;
+        }
+        .product-price span {
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-decoration: line-through;
+            margin-left: 0.5rem;
+        }
+        .buy-btn {
+            display: block;
+            width: 100%;
+            padding: 0.9rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-align: center;
+            text-decoration: none;
+            border: 2px solid var(--purple-accent);
+            border-radius: 50px;
+            background: transparent;
+            color: var(--white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .buy-btn:hover {
+            background: var(--purple-accent);
+            box-shadow: 0 0 20px rgba(155, 77, 139, 0.5);
+        }
+
+        /* ========== BANNER PROMOCIONAL ========== */
+        .promo-banner {
+            background: linear-gradient(90deg, var(--purple-main), var(--purple-accent));
+            padding: 3rem 2rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .promo-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .promo-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1em;
+        }
+        .promo-text {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: linear-gradient(to bottom, transparent, rgba(13, 5, 15, 0.95));
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+        }
+        .footer-logo { margin-bottom: 2rem; }
+        .footer-logo img {
+            max-width: 250px;
+            width: 60%;
+            filter: drop-shadow(0 0 30px rgba(155, 77, 139, 0.5));
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover { color: var(--purple-light); }
+        .footer-social { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; }
+        .footer-social a {
+            width: 40px; height: 40px;
+            border: 2px solid var(--purple-main);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            transition: all 0.3s ease;
+        }
+        .footer-social a:hover {
+            background: var(--purple-accent);
+            border-color: var(--purple-accent);
+            color: var(--white);
+        }
+        .footer-social svg { width: 18px; height: 18px; fill: currentColor; }
+        .footer-copyright {
+            color: var(--gray);
+            font-size: 0.8rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--purple-deep);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            header { padding: 0.8rem 1.5rem; }
+            .logo-img { height: 40px; }
+            .nav-left a span { display: none; }
+            .merch-hero { padding: 8rem 1.5rem 3rem; }
+            .merch-title { letter-spacing: 0.1em; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            .product-info { padding: 1rem; }
+            .product-name { font-size: 0.95rem; }
+            .product-price { font-size: 1.2rem; }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid { grid-template-columns: 1fr; max-width: 350px; margin: 0 auto; }
+            .footer-links { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header id="header">
+        <nav>
+            <div class="nav-left">
+                <a href="index.html">
+                    <svg viewBox="0 0 24 24" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    <span data-i18n="nav.back">Volver al sitio</span>
+                </a>
+            </div>
+            <div class="logo-center">
+                <a href="index.html"><img src="https://i.ibb.co/DDhvcFM7/Logo-SNM-Emblema.png" alt="She No More" class="logo-img"></a>
+            </div>
+            <div class="nav-right">
+                <div class="lang-toggle">
+                    <button class="lang-btn active" data-lang="es">ES</button>
+                    <span class="lang-divider">|</span>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- HERO MERCH -->
+    <section class="merch-hero">
+        <div class="merch-hero-content">
+            <h1 class="merch-title" data-i18n="merch.title">Merch <span class="title-logo"></span>ficial</h1>
+        </div>
+    </section>
+
+    <!-- PRODUCTOS -->
+    <section class="products-section">
+        <div class="products-grid">
+            <!-- Playera Logo Colores -->
+            <div class="product-card" data-category="playeras">
+                <div class="product-image">
+                    <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533192/PP_Colores_3_trjugz.jpg" alt="Playera Logo Colores">
+                    <div class="product-gallery">
+                        <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533192/PP_Colores_3_trjugz.jpg" class="thumb active" data-full="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533192/PP_Colores_3_trjugz.jpg">
+                        <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533199/PP_Colores_2_ig54je.jpg" class="thumb" data-full="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533199/PP_Colores_2_ig54je.jpg">
+                        <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533194/PP_Colores_1_xhwj5u.jpg" class="thumb" data-full="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533194/PP_Colores_1_xhwj5u.jpg">
+                        <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533196/PP_Colores_4_cenjcp.jpg" class="thumb" data-full="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533196/PP_Colores_4_cenjcp.jpg">
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name" data-i18n="product.playera_colores">Playera Logo Colores</h3>
+                    <p class="product-price">$250 MXN</p>
+                    <a href="#" class="buy-btn" data-product="Playera Logo Colores" data-product-en="Color Logo T-Shirt" data-price="250">Comprar</a>
+                </div>
+            </div>
+
+            <!-- Playera Logo Clásico -->
+            <div class="product-card" data-category="playeras">
+                <div class="product-image">
+                    <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533328/PLAYERA_SIMBOLO_1_h36zan.jpg" alt="Playera Logo Clásico">
+                    <div class="product-gallery">
+                        <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533328/PLAYERA_SIMBOLO_1_h36zan.jpg" class="thumb active" data-full="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533328/PLAYERA_SIMBOLO_1_h36zan.jpg">
+                        <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533326/PLAYERA_SIMBOLO_4_oyo53v.jpg" class="thumb" data-full="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533326/PLAYERA_SIMBOLO_4_oyo53v.jpg">
+                        <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533323/PLAYERA_SIMBOLO_3_qne9c5.jpg" class="thumb" data-full="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533323/PLAYERA_SIMBOLO_3_qne9c5.jpg">
+                        <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533305/PLAYERA_SIMBOLO_2_vt8btr.jpg" class="thumb" data-full="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533305/PLAYERA_SIMBOLO_2_vt8btr.jpg">
+                    </div>
+                    <span class="product-badge">Más vendida</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name" data-i18n="product.playera_clasico">Playera Logo Clásico</h3>
+                    <p class="product-price">$250 MXN</p>
+                    <a href="#" class="buy-btn" data-product="Playera Logo Clásico" data-product-en="Classic Logo T-Shirt" data-price="250">Comprar</a>
+                </div>
+            </div>
+
+            <!-- Playera You Shall Rise Again -->
+            <div class="product-card" data-category="playeras">
+                <div class="product-image">
+                    <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533413/PP_YSRA2_z2gtx4.jpg" alt="Playera You Shall Rise Again">
+                    <div class="product-gallery">
+                        <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533413/PP_YSRA2_z2gtx4.jpg" class="thumb active" data-full="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533413/PP_YSRA2_z2gtx4.jpg">
+                        <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533408/PP_YSRA_iyt13z.jpg" class="thumb" data-full="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533408/PP_YSRA_iyt13z.jpg">
+                        <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533405/PP_YSRA4_yroogy.jpg" class="thumb" data-full="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533405/PP_YSRA4_yroogy.jpg">
+                        <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533410/PP_YSRA3_h9aogu.jpg" class="thumb" data-full="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533410/PP_YSRA3_h9aogu.jpg">
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name" data-i18n="product.playera_ysra">Playera You Shall Rise Again</h3>
+                    <p class="product-price">$250 MXN</p>
+                    <a href="#" class="buy-btn" data-product="Playera You Shall Rise Again" data-product-en="You Shall Rise Again T-Shirt" data-price="250">Comprar</a>
+                </div>
+            </div>
+
+            <!-- Totebag Burn It All -->
+            <div class="product-card" data-category="accesorios">
+                <div class="product-image">
+                    <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533734/TBTB_1_k3q1om.jpg" alt="Totebag Burn It All">
+                    <div class="product-gallery">
+                        <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533734/TBTB_1_k3q1om.jpg" class="thumb active" data-full="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533734/TBTB_1_k3q1om.jpg">
+                        <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533731/TBTB_5_sb8mdy.jpg" class="thumb" data-full="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533731/TBTB_5_sb8mdy.jpg">
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name" data-i18n="product.totebag_burn">Totebag Burn It All</h3>
+                    <p class="product-price">$300 MXN</p>
+                    <a href="#" class="buy-btn" data-product="Totebag Burn It All" data-product-en="Burn It All Tote Bag" data-price="300">Comprar</a>
+                </div>
+            </div>
+
+            <!-- Totebag Resurgir -->
+            <div class="product-card" data-category="accesorios">
+                <div class="product-image">
+                    <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533849/TBTB_4_nmizyo.jpg" alt="Totebag Resurgir">
+                    <div class="product-gallery">
+                        <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533849/TBTB_4_nmizyo.jpg" class="thumb active" data-full="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533849/TBTB_4_nmizyo.jpg">
+                        <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533852/TBTB_3_s6sw9v.jpg" class="thumb" data-full="https://res.cloudinary.com/diobgaxfl/image/upload/v1769533852/TBTB_3_s6sw9v.jpg">
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name" data-i18n="product.totebag_resurgir">Totebag Resurgir</h3>
+                    <p class="product-price">$300 MXN</p>
+                    <a href="#" class="buy-btn" data-product="Totebag Resurgir" data-product-en="Resurgir Tote Bag" data-price="300">Comprar</a>
+                </div>
+            </div>
+
+            <!-- Collar -->
+            <div class="product-card" data-category="accesorios">
+                <div class="product-image">
+                    <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769565982/Collar_1_hozkfr_ijs3io.jpg" alt="Collar She No More">
+                    <div class="product-gallery">
+                        <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769565982/Collar_1_hozkfr_ijs3io.jpg" class="thumb active" data-full="https://res.cloudinary.com/diobgaxfl/image/upload/v1769565982/Collar_1_hozkfr_ijs3io.jpg">
+                        <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769565983/Collar_2_me63zv_mtkvh8.jpg" class="thumb" data-full="https://res.cloudinary.com/diobgaxfl/image/upload/v1769565983/Collar_2_me63zv_mtkvh8.jpg">
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name" data-i18n="product.collar">Collar She No More</h3>
+                    <p class="product-price">$150 MXN</p>
+                    <a href="#" class="buy-btn" data-product="Collar She No More" data-product-en="She No More Necklace" data-price="150">Comprar</a>
+                </div>
+            </div>
+
+            <!-- Llavero -->
+            <div class="product-card" data-category="accesorios">
+                <div class="product-image">
+                    <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769565981/Llavero_1_mutcfz_qmccjv.jpg" alt="Llavero She No More">
+                    <div class="product-gallery">
+                        <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769565981/Llavero_1_mutcfz_qmccjv.jpg" class="thumb active" data-full="https://res.cloudinary.com/diobgaxfl/image/upload/v1769565981/Llavero_1_mutcfz_qmccjv.jpg">
+                        <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769565981/Llavero_2_idvntp_wv23eu.jpg" class="thumb" data-full="https://res.cloudinary.com/diobgaxfl/image/upload/v1769565981/Llavero_2_idvntp_wv23eu.jpg">
+                    </div>
+                    <span class="product-badge low-stock" data-i18n="product.badge.lastunits">¡Últimas piezas!</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name" data-i18n="product.llavero">Llavero She No More</h3>
+                    <p class="product-price">$100 MXN</p>
+                    <p class="product-stock low" data-i18n="product.lastunits">Últimas piezas</p>
+                    <a href="#" class="buy-btn" data-product="Llavero She No More" data-product-en="She No More Keychain" data-price="100">Comprar</a>
+                </div>
+            </div>
+
+            <!-- Taza You Shall Rise Again -->
+            <div class="product-card" data-category="accesorios">
+                <div class="product-image">
+                    <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769565982/Taza_YSRA_fjuckz_hwrr74.jpg" alt="Taza You Shall Rise Again">
+                    <span class="product-badge low-stock" data-i18n="product.badge.lastunits">¡Últimas piezas!</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name" data-i18n="product.taza">Taza You Shall Rise Again</h3>
+                    <p class="product-price">$80 MXN</p>
+                    <p class="product-stock low" data-i18n="product.lastunits">Últimas piezas</p>
+                    <a href="#" class="buy-btn" data-product="Taza You Shall Rise Again" data-product-en="You Shall Rise Again Mug" data-price="80">Comprar</a>
+                </div>
+            </div>
+
+            <!-- Disco Voice For The Voiceless -->
+            <div class="product-card" data-category="musica">
+                <div class="product-image">
+                    <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769565982/VFTV_1_a031gs_h5chhq.jpg" alt="CD Voice For The Voiceless">
+                    <div class="product-gallery">
+                        <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769565982/VFTV_1_a031gs_h5chhq.jpg" class="thumb active" data-full="https://res.cloudinary.com/diobgaxfl/image/upload/v1769565982/VFTV_1_a031gs_h5chhq.jpg">
+                        <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769565982/VFTV_2_qxpymr_au2jsz.jpg" class="thumb" data-full="https://res.cloudinary.com/diobgaxfl/image/upload/v1769565982/VFTV_2_qxpymr_au2jsz.jpg">
+                    </div>
+                    <span class="product-badge">Álbum</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name" data-i18n="product.cd">CD Voice For The Voiceless</h3>
+                    <p class="product-price">$200 MXN</p>
+                    <a href="#" class="buy-btn" data-product="CD Voice For The Voiceless" data-product-en="Voice For The Voiceless CD" data-price="200">Comprar</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- BANNER PROMOCIONAL -->
+    <div class="promo-banner">
+        <div class="promo-content">
+            <h3 class="promo-title" data-i18n="promo.title">Envío gratis en compras mayores a $800 MXN</h3>
+            <p class="promo-text" data-i18n="promo.text">Dentro de la República Mexicana</p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">
+            <a href="index.html"><img src="https://i.ibb.co/20L06zVc/Logo-SNM-01-2.png" alt="She No More"></a>
+        </div>
+        <div class="footer-links">
+            <a href="index.html" data-i18n="footer.home">Inicio</a>
+            <a href="mailto:shenomore@lafraternidad.com.mx" data-i18n="footer.contact">Contacto</a>
+        </div>
+        <div class="footer-social">
+            <a href="https://www.tiktok.com/@shenomoreofficial" target="_blank"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+            <a href="https://www.instagram.com/shenomoreofficial/" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+            <a href="https://www.facebook.com/shenomoreofficial" target="_blank"><svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
+            <a href="https://www.youtube.com/shenomore" target="_blank"><svg viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></a>
+        </div>
+        <p class="footer-copyright" data-i18n="footer.copyright">© 2025 She No More. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 50));
+
+        // Product gallery thumbnails
+        document.querySelectorAll('.product-gallery .thumb').forEach(thumb => {
+            thumb.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const gallery = thumb.closest('.product-gallery');
+                const mainImg = thumb.closest('.product-image').querySelector(':scope > img');
+                
+                gallery.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+                thumb.classList.add('active');
+                mainImg.src = thumb.dataset.full;
+            });
+        });
+
+        // Translations
+        const translations = {
+            es: {
+                'nav.back': 'Volver al sitio',
+                'merch.title': 'Merch <span class="title-logo"></span>ficial',
+                'promo.title': 'Envío gratis en compras mayores a $800 MXN',
+                'promo.text': 'Dentro de la República Mexicana',
+                'product.buy': 'Comprar',
+                'product.lastunits': 'Últimas piezas',
+                'product.badge.lastunits': '¡Últimas piezas!',
+                'product.playera_colores': 'Playera Logo Colores',
+                'product.playera_clasico': 'Playera Logo Clásico',
+                'product.playera_ysra': 'Playera You Shall Rise Again',
+                'product.totebag_burn': 'Totebag Burn It All',
+                'product.totebag_resurgir': 'Totebag Resurgir',
+                'product.collar': 'Collar She No More',
+                'product.llavero': 'Llavero She No More',
+                'product.taza': 'Taza You Shall Rise Again',
+                'product.cd': 'CD Voice For The Voiceless',
+                'footer.home': 'Inicio',
+                'footer.contact': 'Contacto',
+                'footer.copyright': '© 2025 She No More. Todos los derechos reservados.',
+                'wa.message': '¡Hola! Me interesa comprar: {product} (${price} MXN)'
+            },
+            en: {
+                'nav.back': 'Back to site',
+                'merch.title': '<span class="title-logo"></span>fficial Merch',
+                'promo.title': 'Free shipping on orders over $800 MXN',
+                'promo.text': 'Within Mexico',
+                'product.buy': 'Buy',
+                'product.lastunits': 'Last units',
+                'product.badge.lastunits': 'Last units!',
+                'product.playera_colores': 'Color Logo T-Shirt',
+                'product.playera_clasico': 'Classic Logo T-Shirt',
+                'product.playera_ysra': 'You Shall Rise Again T-Shirt',
+                'product.totebag_burn': 'Burn It All Tote Bag',
+                'product.totebag_resurgir': 'Resurgir Tote Bag',
+                'product.collar': 'She No More Necklace',
+                'product.llavero': 'She No More Keychain',
+                'product.taza': 'You Shall Rise Again Mug',
+                'product.cd': 'Voice For The Voiceless CD',
+                'footer.home': 'Home',
+                'footer.contact': 'Contact',
+                'footer.copyright': '© 2025 She No More. All rights reserved.',
+                'wa.message': 'Hi! I\'m interested in buying: {product} (${price} MXN)'
+            }
+        };
+
+        const WHATSAPP_NUMBER = '527223622800';
+        let currentLang = localStorage.getItem('snm_lang') || 'es';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('snm_lang', lang);
+            document.documentElement.lang = lang;
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            // Update buy buttons
+            document.querySelectorAll('.buy-btn').forEach(btn => {
+                btn.textContent = translations[lang]['product.buy'];
+            });
+        }
+
+        // WhatsApp click handler
+        document.querySelectorAll('.buy-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const product = currentLang === 'es' ? btn.dataset.product : btn.dataset.productEn;
+                const price = btn.dataset.price;
+                const message = translations[currentLang]['wa.message']
+                    .replace('{product}', product)
+                    .replace('{price}', price);
+                const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+                window.open(url, '_blank');
+            });
+        });
+
+        // Language toggle
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+        });
+
+        // Initialize
+        setLanguage(currentLang);
+    </script>
+</body>
+</html>

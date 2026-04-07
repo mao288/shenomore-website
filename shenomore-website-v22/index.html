@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHE NO MORE - Metal Sinfónico Activista</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/KjRZ2gzD/Logo-SNM-Emblema-2.png">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/KjRZ2gzD/Logo-SNM-Emblema-2.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple-dark: #1a0a1f;
+            --purple-deep: #2d1b36;
+            --purple-main: #6b2d5b;
+            --purple-accent: #9b4d8b;
+            --purple-light: #c77dbb;
+            --purple-glow: #e4a5d9;
+            --white: #f5f0f5;
+            --gray: #a89fa8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: 
+                linear-gradient(180deg, rgba(26, 10, 31, 0.9) 0%, rgba(26, 10, 31, 0.85) 50%, rgba(26, 10, 31, 0.9) 100%),
+                url('https://i.ibb.co/7dbF2SSy/Wallpaper.png') center/cover no-repeat fixed;
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* ========== HEADER ========== */
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: linear-gradient(to bottom, rgba(26, 10, 31, 0.98), rgba(26, 10, 31, 0.7));
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        header.scrolled { padding: 0.5rem 2rem; background: rgba(26, 10, 31, 0.98); }
+
+        nav {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+
+        .menu-container { display: flex; justify-content: flex-start; }
+        .menu-toggle {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            transition: all 0.3s ease;
+        }
+        .menu-toggle:hover span { background: var(--purple-light); }
+        .menu-toggle span {
+            width: 28px; height: 2px;
+            background: var(--white);
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+        .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        .nav-panel {
+            position: fixed;
+            top: 0; left: -320px;
+            width: 320px; height: 100vh;
+            background: linear-gradient(180deg, var(--purple-dark) 0%, #0d050f 100%);
+            z-index: 999;
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--purple-main);
+            box-shadow: 5px 0 30px rgba(0, 0, 0, 0.5);
+        }
+        .nav-panel.active { left: 0; }
+
+        .nav-panel-header {
+            padding: 2rem;
+            border-bottom: 1px solid var(--purple-deep);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-panel-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: var(--white);
+            text-shadow: 0 0 20px var(--purple-accent);
+        }
+        .nav-panel-logo span { color: var(--purple-light); }
+        .nav-panel-close {
+            background: none; border: none;
+            color: var(--gray);
+            cursor: pointer;
+            padding: 5px;
+            transition: all 0.3s ease;
+        }
+        .nav-panel-close:hover { color: var(--purple-light); }
+        .nav-panel-close svg { width: 24px; height: 24px; stroke: currentColor; }
+
+        .nav-links {
+            list-style: none;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .nav-links li { border-bottom: 1px solid var(--purple-deep); }
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 1rem 0;
+            position: relative;
+        }
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            left: -2rem; top: 50%;
+            transform: translateY(-50%);
+            width: 0; height: 2px;
+            background: var(--purple-light);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--white); padding-left: 1rem; }
+        .nav-links a:hover::before { width: 1.5rem; }
+
+        .nav-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .nav-overlay.active { opacity: 1; visibility: visible; }
+
+        .logo-center { display: flex; justify-content: center; }
+        .logo-img {
+            height: 50px;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 20px var(--purple-accent));
+        }
+        header.scrolled .logo-img { height: 40px; }
+
+        .header-social { display: flex; gap: 1.2rem; justify-content: flex-end; }
+        .header-social a {
+            color: var(--gray);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .header-social a:hover { color: var(--purple-light); transform: translateY(-2px); }
+        .header-social svg { width: 20px; height: 20px; fill: currentColor; }
+
+        /* ========== HERO ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-video {
+            position: absolute;
+            top: 50%; left: 50%;
+            min-width: 100%; min-height: 100%;
+            width: auto; height: auto;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            object-fit: cover;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(26,10,31,0.7) 0%, rgba(26,10,31,0.5) 50%, rgba(26,10,31,0.8) 100%);
+            z-index: 1;
+        }
+        .hero-gradient {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(107,45,91,0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(155,77,139,0.2) 0%, transparent 50%);
+            z-index: 2;
+            pointer-events: none;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .hero-logo {
+            max-width: 500px;
+            width: 85%;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 40px rgba(155,77,139,0.6));
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .hero-tagline {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            letter-spacing: 0.2em;
+            color: var(--purple-light);
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+        }
+        .hero-tagline::before { content: '▶'; margin-right: 0.8rem; font-size: 0.8em; opacity: 0.8; }
+        .hero-tagline:hover { color: var(--white); text-shadow: 0 0 30px var(--purple-light); }
+        .hero-tagline::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 0; height: 2px;
+            background: var(--purple-light);
+            transition: width 0.4s ease;
+        }
+        .hero-tagline:hover::after { width: 100%; }
+
+        .hero-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            max-width: 700px;
+            width: 90%;
+        }
+        .btn {
+            padding: 1rem 2rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 2px solid var(--purple-accent);
+            border-radius: 50px;
+            background: transparent;
+            color: var(--white);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            text-align: center;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(155,77,139,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+        .btn:hover::before { left: 100%; }
+        .btn:hover {
+            background: var(--purple-accent);
+            border-color: var(--purple-light);
+            box-shadow: 0 0 30px rgba(155,77,139,0.5);
+            transform: translateY(-3px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem; left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+        .scroll-indicator svg { width: 30px; height: 30px; stroke: var(--purple-light); transition: stroke 0.3s ease; }
+        .scroll-indicator:hover svg { stroke: var(--white); }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* ========== BANDA ========== */
+        .band {
+            background: transparent;
+            padding: 6rem 2rem;
+        }
+        .band-inner { max-width: 1400px; margin: 0 auto; }
+        .section-logo { text-align: center; margin-bottom: 4rem; }
+        .section-logo img {
+            max-width: 154px;
+            width: 33%;
+            filter: drop-shadow(0 0 30px rgba(155,77,139,0.5));
+        }
+        .band-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+        .member-card { text-align: center; position: relative; }
+        .member-image { position: relative; margin-bottom: 1.5rem; overflow: hidden; }
+        .member-image img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            object-position: top;
+            filter: grayscale(20%);
+            transition: all 0.5s ease;
+            border: 2px solid rgba(199,125,187,0.3);
+            box-shadow: 
+                0 0 15px rgba(255,255,255,0.1),
+                0 0 30px rgba(155,77,139,0.3),
+                0 0 50px rgba(155,77,139,0.2);
+        }
+        .member-card:hover .member-image img {
+            filter: grayscale(0%);
+            transform: scale(1.03);
+            border-color: var(--purple-light);
+            box-shadow: 
+                0 0 20px rgba(255,255,255,0.25),
+                0 0 40px rgba(155,77,139,0.5),
+                0 0 70px rgba(155,77,139,0.4);
+        }
+        .member-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 40%;
+            background: linear-gradient(to top, rgba(26, 10, 31, 0.9), transparent);
+            pointer-events: none;
+        }
+        .member-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+        .member-card:hover .member-name { color: var(--purple-light); text-shadow: 0 0 20px var(--purple-accent); }
+        .member-role {
+            color: var(--purple-light);
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        /* ========== DISCOGRAFÍA ========== */
+        .discography { padding: 6rem 2rem; max-width: 1400px; margin: 0 auto; }
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 4rem;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 30px var(--purple-accent);
+        }
+
+        .album-ep-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-bottom: 4rem;
+            max-width: 980px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .album-ep-card { text-align: center; }
+        .album-ep-card a { text-decoration: none; color: inherit; display: block; }
+        .album-ep-card .album-cover {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border: 3px solid var(--purple-main);
+            box-shadow: 0 0 40px rgba(107, 45, 91, 0.4);
+            transition: all 0.4s ease;
+            margin-bottom: 1.5rem;
+        }
+        .album-ep-card .album-cover:hover {
+            border-color: var(--purple-light);
+            box-shadow: 0 0 60px rgba(155, 77, 139, 0.6);
+            transform: scale(1.02);
+        }
+        .album-ep-card .album-type {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            background: var(--purple-accent);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            border-radius: 50px;
+        }
+        .album-ep-card .album-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px var(--purple-accent);
+        }
+        .album-ep-card .album-year {
+            color: var(--purple-light);
+            font-size: 1.1rem;
+            letter-spacing: 0.15em;
+        }
+
+        .disco-category { margin-bottom: 4rem; }
+        .category-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--purple-light);
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--purple-deep);
+            letter-spacing: 0.15em;
+        }
+        .singles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        .album-card { position: relative; cursor: pointer; transition: transform 0.4s ease; }
+        .album-card:hover { transform: translateY(-10px); }
+        .album-card a { text-decoration: none; color: inherit; }
+        .album-card .album-cover {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border: 2px solid var(--purple-main);
+            transition: all 0.4s ease;
+        }
+        .album-card:hover .album-cover {
+            border-color: var(--purple-light);
+            box-shadow: 0 0 30px rgba(155, 77, 139, 0.5);
+        }
+        .album-card .play-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            aspect-ratio: 1;
+            background: rgba(26, 10, 31, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .album-card:hover .play-overlay { opacity: 1; }
+        .play-overlay svg { width: 50px; height: 50px; fill: var(--purple-light); filter: drop-shadow(0 0 10px var(--purple-accent)); }
+        .album-card .album-info { padding: 1.2rem 0; }
+        .album-card .album-title { font-family: 'Cinzel', serif; font-size: 1.1rem; margin-bottom: 0.3rem; }
+        .album-card .album-year { color: var(--purple-light); font-size: 0.9rem; letter-spacing: 0.1em; }
+
+        /* ========== NOSOTROS ========== */
+        .about {
+            background: transparent;
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(ellipse at 10% 20%, rgba(107, 45, 91, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 80%, rgba(155, 77, 139, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .about-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+        .about-content { text-align: center; }
+        .about-text {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+        .about-text:last-of-type { margin-bottom: 3rem; }
+        .about-highlight {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--purple-light);
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 20px var(--purple-accent);
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--purple-deep);
+            border-bottom: 1px solid var(--purple-deep);
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: linear-gradient(to bottom, transparent, rgba(13, 5, 15, 0.9));
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+        }
+        .footer-logo { margin-bottom: 2.5rem; }
+        .footer-logo img {
+            max-width: 300px;
+            width: 70%;
+            filter: drop-shadow(0 0 30px rgba(155, 77, 139, 0.5));
+            transition: all 0.3s ease;
+        }
+        .footer-logo img:hover {
+            filter: drop-shadow(0 0 40px rgba(155, 77, 139, 0.7));
+            transform: scale(1.02);
+        }
+        .footer-social { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2rem; }
+        .footer-social a {
+            width: 45px; height: 45px;
+            border: 2px solid var(--purple-main);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            transition: all 0.3s ease;
+        }
+        .footer-social a:hover {
+            background: var(--purple-accent);
+            border-color: var(--purple-accent);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(107, 45, 91, 0.4);
+        }
+        .footer-social svg { width: 20px; height: 20px; fill: currentColor; }
+        .footer-contact { color: var(--gray); margin-bottom: 2rem; font-size: 1.1rem; }
+        .footer-contact a { color: var(--purple-light); text-decoration: none; transition: all 0.3s ease; }
+        .footer-contact a:hover { color: var(--white); text-shadow: 0 0 10px var(--purple-light); }
+        .footer-copyright {
+            color: var(--gray);
+            font-size: 0.85rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--purple-deep);
+        }
+
+        /* ========== SHOWS ========== */
+        .shows {
+            padding: 5rem 2rem;
+        }
+        .shows-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .show-flyer {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 3px solid var(--purple-main);
+            transition: all 0.4s ease;
+            aspect-ratio: 3/4;
+            display: block;
+            text-decoration: none;
+        }
+        .show-flyer:hover {
+            border-color: var(--purple-light);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(107, 45, 91, 0.5);
+        }
+        .show-flyer img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .show-flyer:hover img {
+            transform: scale(1.05);
+        }
+        .show-flyer-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(26, 10, 31, 0.95) 0%, rgba(26, 10, 31, 0.7) 50%, transparent 100%);
+            text-align: center;
+        }
+        .show-flyer-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.3rem;
+            color: var(--white);
+        }
+        .show-flyer-year {
+            color: var(--purple-light);
+            font-size: 0.9rem;
+            letter-spacing: 0.15em;
+        }
+        .show-flyer-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: var(--purple-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        .show-flyer:hover .show-flyer-icon {
+            opacity: 1;
+        }
+        .show-flyer-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--white);
+        }
+
+        @media (max-width: 900px) {
+            .shows-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+        @media (max-width: 600px) {
+            .shows-grid {
+                grid-template-columns: 1fr;
+                max-width: 350px;
+            }
+            .show-card-back p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ========== LANGUAGE TOGGLE ========== */
+        .lang-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 1rem;
+            padding-left: 1rem;
+            border-left: 1px solid var(--purple-main);
+        }
+        .lang-btn {
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .lang-btn:hover { color: var(--white); }
+        .lang-btn.active {
+            color: var(--white);
+            background: var(--purple-accent);
+        }
+
+        /* ========== POPUP SUSCRIPCIÓN ========== */
+        .popup-overlay {
+            position: fixed;
+            bottom: 1.5rem; right: 1.5rem;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .popup {
+            background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple-deep) 100%);
+            border: 2px solid var(--purple-main);
+            border-radius: 12px;
+            padding: 1.5rem;
+            width: 320px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(107, 45, 91, 0.3);
+        }
+        .popup-close {
+            position: absolute;
+            top: 0.8rem; right: 0.8rem;
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            padding: 3px;
+            transition: all 0.3s ease;
+        }
+        .popup-close:hover { color: var(--purple-light); }
+        .popup-close svg { width: 18px; height: 18px; stroke: currentColor; }
+        .popup-logo {
+            max-width: 80px;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 15px rgba(155, 77, 139, 0.5));
+        }
+        .popup-text {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        .popup-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .popup-input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+            background: rgba(26, 10, 31, 0.6);
+            border: 2px solid var(--purple-main);
+            border-radius: 50px;
+            color: var(--white);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .popup-input::placeholder { color: var(--gray); }
+        .popup-input:focus {
+            border-color: var(--purple-light);
+            box-shadow: 0 0 15px rgba(155, 77, 139, 0.3);
+        }
+        .popup-btn {
+            width: 100%;
+            padding: 0.8rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: 2px solid var(--purple-accent);
+            border-radius: 50px;
+            background: var(--purple-accent);
+            color: var(--white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .popup-btn:hover {
+            background: var(--purple-light);
+            border-color: var(--purple-light);
+            box-shadow: 0 0 20px rgba(155, 77, 139, 0.5);
+        }
+        .popup-skip {
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 0.3rem;
+            transition: color 0.3s ease;
+        }
+        .popup-skip:hover { color: var(--purple-light); }
+
+        @media (max-width: 480px) {
+            .popup-overlay {
+                bottom: 1rem; right: 1rem; left: 1rem;
+            }
+            .popup {
+                width: 100%;
+            }
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 900px) {
+            nav { 
+                display: grid;
+                grid-template-columns: 1fr auto 1fr;
+            }
+            .logo-center { justify-self: center; }
+            .logo-img { height: 40px; }
+            .header-social { gap: 1rem; justify-self: end; }
+            .header-social svg { width: 18px; height: 18px; }
+            .menu-toggle { display: flex; }
+            .nav-panel { width: 280px; left: -280px; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-logo { max-width: 350px; }
+            .hero-tagline { letter-spacing: 0.1em; margin-bottom: 2rem; }
+            .hero-buttons { grid-template-columns: 1fr; max-width: 320px; }
+            .btn { padding: 1rem 1.5rem; font-size: 0.8rem; }
+            .band-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+            .member-name { font-size: 1.2rem; }
+            .member-role { font-size: 0.85rem; }
+            .album-ep-grid { grid-template-columns: 1fr; gap: 3rem; max-width: 280px; margin: 0 auto 4rem; }
+            .album-ep-card .album-title { font-size: 1.5rem; }
+            .singles-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+            .about { padding: 4rem 1.5rem; }
+            .about-text { font-size: 1.05rem; line-height: 1.9; }
+            .about-highlight { font-size: 1.3rem; }
+        }
+
+        @media (max-width: 480px) {
+            header { padding: 0.8rem 1rem; }
+            .header-social { gap: 0.8rem; }
+            .header-social svg { width: 16px; height: 16px; }
+            .logo-img { height: 35px; }
+            .nav-panel { width: 100%; left: -100%; }
+            .hero-logo { max-width: 280px; }
+            .hero-tagline { font-size: 1rem; letter-spacing: 0.08em; }
+            .btn { font-size: 0.75rem; padding: 0.9rem 1.2rem; }
+            .band { padding: 4rem 1.5rem; }
+            .band-grid { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; }
+            .section-logo { margin-bottom: 3rem; }
+            .discography { padding: 4rem 1.5rem; }
+            .singles-grid { gap: 1rem; }
+            .album-card .album-title { font-size: 0.95rem; }
+            .about-text { font-size: 1rem; line-height: 1.8; }
+            .about-highlight { font-size: 1.1rem; letter-spacing: 0.05em; }
+            .footer-logo img { max-width: 200px; }
+            .footer-social { gap: 0.8rem; }
+            .footer-social a { width: 38px; height: 38px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header id="header">
+        <nav>
+            <div class="menu-container">
+                <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+            </div>
+            <div class="logo-center">
+                <a href="#"><img src="https://i.ibb.co/DDhvcFM7/Logo-SNM-Emblema.png" alt="She No More" class="logo-img"></a>
+            </div>
+            <div class="header-social">
+                <a href="https://www.tiktok.com/@shenomoreofficial" target="_blank" title="TikTok"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+                <a href="https://www.instagram.com/shenomoreofficial/" target="_blank" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                <a href="https://www.facebook.com/shenomoreofficial" target="_blank" title="Facebook"><svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
+                <a href="https://www.youtube.com/shenomore" target="_blank" title="YouTube"><svg viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></a>
+                <div class="lang-toggle">
+                    <button class="lang-btn active" data-lang="es">ES</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- NAV PANEL -->
+    <div class="nav-overlay" id="navOverlay"></div>
+    <div class="nav-panel" id="navPanel">
+        <div class="nav-panel-header">
+            <div class="nav-panel-logo">SHE <span>NO</span> MORE</div>
+            <button class="nav-panel-close" id="navClose"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#inicio" data-i18n="nav.inicio">Inicio</a></li>
+            <li><a href="#nosotros" data-i18n="nav.nosotros">Nosotros</a></li>
+            <li><a href="#discografia" data-i18n="nav.discografia">Discografía</a></li>
+            <li><a href="#singles" data-i18n="nav.singles">Singles</a></li>
+            <li><a href="#banda" data-i18n="nav.banda">Banda</a></li>
+            <li><a href="#shows" data-i18n="nav.shows">Shows</a></li>
+            <li><a href="merch.html" data-i18n="nav.merch">Merch</a></li>
+            <li><a href="#contacto" data-i18n="nav.contacto">Contacto</a></li>
+        </ul>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="https://res.cloudinary.com/diobgaxfl/video/upload/v1773457722/SNM_Buscare_Mau_pehcmn.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-gradient"></div>
+        <div class="hero-content">
+            <img src="https://i.ibb.co/67KN1QDX/Logo-SNM-02-2.png" alt="She No More" class="hero-logo">
+            <a href="https://www.youtube.com/watch?v=aJVngtRuEjE" target="_blank" class="hero-tagline" data-i18n="hero.tagline">Escucha Buscaré</a>
+            <div class="hero-buttons">
+                <a href="https://linktr.ee/shenomore" target="_blank" class="btn" data-i18n="hero.btn1">Compra/Stream</a>
+                <a href="https://www.youtube.com/watch?v=FEn5zLHzbZM" target="_blank" class="btn" data-i18n="hero.btn2">Ver 'Burn It All'</a>
+                <a href="https://www.youtube.com/watch?v=TrgiGtPSKeA" target="_blank" class="btn" data-i18n="hero.btn3">Ver 'Resurgir ft. Mark Jansen'</a>
+                <a href="merch.html" class="btn" data-i18n="hero.btn4">Merch</a>
+            </div>
+        </div>
+        <a href="#nosotros" class="scroll-indicator"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+    </section>
+
+    <!-- NOSOTROS -->
+    <section class="about" id="nosotros">
+        <div class="about-inner">
+            <h2 class="section-title" data-i18n="about.title">Nosotros</h2>
+            <div class="about-content">
+                <p class="about-text" data-i18n="about.text1">She No More es una banda que fusiona hard rock, metal sinfónico y melódico con toques de electro pop. Su música no solo busca impactar: busca despertar. A través de letras que exploran las heridas del mundo —desde la injusticia social y el colapso ambiental, hasta la violencia, la guerra, el abuso y la salud mental— se han convertido en una voz activa dentro y fuera del escenario.</p>
+                <p class="about-text" data-i18n="about.text2">Tras acompañar a Visions of Atlantis y Epica en sus giras por México, y presentar su álbum Voice For The Voiceless, la banda reafirma su misión: ser la voz de quienes no la tienen. 2026 marca su año de consolidación.</p>
+                <p class="about-highlight" data-i18n="about.highlight">Únete a la lucha. Suma tu voz.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- DISCOGRAFÍA -->
+    <section class="discography" id="discografia">
+        <h2 class="section-title" data-i18n="disco.title">Discografía</h2>
+
+        <div class="album-ep-grid">
+            <div class="album-ep-card">
+                <a href="https://open.spotify.com/intl-es/album/4yPrVbinH7ub4XuwJP87SX?si=Hwsja5ZxR62rfl7l3TXSQw" target="_blank">
+                    <img src="https://i.ibb.co/jkzM92KG/Voice-For-The-Voiceless.jpg" alt="Voice For The Voiceless" class="album-cover">
+                </a>
+                <span class="album-type" data-i18n="disco.album">Álbum</span>
+                <h4 class="album-title">Voice For The Voiceless</h4>
+                <p class="album-year">2022</p>
+            </div>
+            <div class="album-ep-card">
+                <a href="https://open.spotify.com/intl-es/album/1yw3lL2wNiHiLICq3Ecyir?si=XDjS07NpSCqBqv4QPKir5A" target="_blank">
+                    <img src="https://i.ibb.co/Z7F6Svb/Run-Away.jpg" alt="Run Away" class="album-cover">
+                </a>
+                <span class="album-type">EP</span>
+                <h4 class="album-title">Run Away</h4>
+                <p class="album-year">2019</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SINGLES -->
+    <section class="discography" id="singles">
+        <h2 class="section-title" data-i18n="singles.title">Singles</h2>
+        <div class="singles-grid">
+            <div class="album-card">
+                <a href="https://open.spotify.com/track/610TRYYWOusuKpfDRu2ldZ?si=DqldgWTbQ4S3k_0uMRJC4w" target="_blank">
+                    <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1773460108/Buscar%C3%A9_gqxnmo.jpg" alt="Buscaré" class="album-cover">
+                    <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                </a>
+                <div class="album-info"><h4 class="album-title">Buscaré</h4><p class="album-year">2026</p></div>
+            </div>
+            <div class="album-card">
+                <a href="https://open.spotify.com/intl-es/album/6ysyRHDMcK4iKEgCgsyZ89?si=UO1-FllLSc--Et0ierIuIQ" target="_blank">
+                    <img src="https://i.ibb.co/DP20wXcY/Tercera-Guerra-Mundial.jpg" alt="Tercera Guerra Mundial" class="album-cover">
+                    <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                </a>
+                <div class="album-info"><h4 class="album-title">Tercera Guerra Mundial</h4><p class="album-year">2025</p></div>
+            </div>
+            <div class="album-card">
+                <a href="https://open.spotify.com/album/4H6fdGUOPqh2uftPwQrvy1?si=0Ey2jMmQRSOBq3Pu-gH3VA" target="_blank">
+                    <img src="https://i.ibb.co/tMDfhjkp/Resurgir.jpg" alt="Resurgir" class="album-cover">
+                    <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                </a>
+                <div class="album-info"><h4 class="album-title">Resurgir ft. Mark Jansen</h4><p class="album-year">2025</p></div>
+            </div>
+            <div class="album-card">
+                <a href="https://open.spotify.com/album/12a77Ugg8mcwTgK0oZP04A?si=F92GwzjQR2yp4Nde5CgvsQ" target="_blank">
+                    <img src="https://i.ibb.co/rf04PL3N/Canto-A-La-Tierra.jpg" alt="Canto a la Tierra" class="album-cover">
+                    <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                </a>
+                <div class="album-info"><h4 class="album-title">Canto a la Tierra</h4><p class="album-year">2024</p></div>
+            </div>
+            <div class="album-card">
+                <a href="https://open.spotify.com/album/5Msjz2U1PC9coWVD0uwCgI?si=OkuVMI0eRJe2NKjrCU0ufw" target="_blank">
+                    <img src="https://i.ibb.co/6RPCXrNH/Now-This.jpg" alt="Now This" class="album-cover">
+                    <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                </a>
+                <div class="album-info"><h4 class="album-title">Now This</h4><p class="album-year">2024</p></div>
+            </div>
+            <div class="album-card">
+                <a href="https://open.spotify.com/intl-es/track/0fz2awiTjVil6eMkNppuWu?si=f21ffdbe89334724" target="_blank">
+                    <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769791739/ab67616d0000b27331b81fbe435f96710ff1f5a0_swesmx.jpg" alt="Burn It All" class="album-cover">
+                    <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                </a>
+                <div class="album-info"><h4 class="album-title">Burn It All</h4><p class="album-year">2023</p></div>
+            </div>
+            <div class="album-card">
+                <a href="https://open.spotify.com/intl-es/track/3N3K5zsZNp5JcOOAEAYLc7?si=ffaf3d0212504bfd" target="_blank">
+                    <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769791739/ab67616d0000b2730a707fb8ed8d854b207c3f2c_qelged.jpg" alt="Voice For The Voiceless" class="album-cover">
+                    <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                </a>
+                <div class="album-info"><h4 class="album-title">Voice For The Voiceless</h4><p class="album-year">2022</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BANDA -->
+    <section class="band" id="banda">
+        <div class="band-inner">
+            <div class="section-logo"><img src="https://i.ibb.co/KjRZ2gzD/Logo-SNM-Emblema-2.png" alt="She No More"></div>
+            <div class="band-grid">
+                <div class="member-card">
+                    <a href="https://www.instagram.com/mariancassaigne" target="_blank">
+                        <div class="member-image"><img src="https://i.ibb.co/k2Z2974x/Mariana-2.jpg" alt="Mariana Cassaigne"></div>
+                    </a>
+                    <h3 class="member-name">Mariana Cassaigne</h3>
+                    <p class="member-role" data-i18n="role.vocals">Voz</p>
+                </div>
+                <div class="member-card">
+                    <a href="https://www.instagram.com/fer_gmr" target="_blank">
+                        <div class="member-image"><img src="https://i.ibb.co/6crg257X/SNMPUEBLAJPG-39-web.jpg" alt="Fer G. Merino"></div>
+                    </a>
+                    <h3 class="member-name">Fer G. Merino</h3>
+                    <p class="member-role" data-i18n="role.guitar">Guitarra</p>
+                </div>
+                <div class="member-card">
+                    <a href="https://www.instagram.com/eddusalmeron" target="_blank">
+                        <div class="member-image"><img src="https://i.ibb.co/Z6cYwRvr/SNM-43.jpg" alt="Eduardo Salmerón"></div>
+                    </a>
+                    <h3 class="member-name">Eduardo Salmerón</h3>
+                    <p class="member-role" data-i18n="role.guitar">Guitarra</p>
+                </div>
+                <div class="member-card">
+                    <a href="https://www.instagram.com/mao.rubio28" target="_blank">
+                        <div class="member-image"><img src="https://i.ibb.co/sMQd4jS/Mao-Rubio.jpg" alt="Mao Rubio"></div>
+                    </a>
+                    <h3 class="member-name">Mao Rubio</h3>
+                    <p class="member-role" data-i18n="role.guitar">Guitarra</p>
+                </div>
+                <div class="member-card">
+                    <a href="https://www.instagram.com/pablo_anduaga" target="_blank">
+                        <div class="member-image"><img src="https://i.ibb.co/wTjT3LZ/Pablo-A-Anduaga.jpg" alt="Pablo A. Anduaga"></div>
+                    </a>
+                    <h3 class="member-name">Pablo A. Anduaga</h3>
+                    <p class="member-role" data-i18n="role.bass">Bajo</p>
+                </div>
+                <div class="member-card">
+                    <a href="https://www.instagram.com/yuyo_loera" target="_blank">
+                        <div class="member-image"><img src="https://i.ibb.co/wnc0x9p/Jes-s-Loera.jpg" alt="Jesús Loera"></div>
+                    </a>
+                    <h3 class="member-name">Jesús Loera</h3>
+                    <p class="member-role" data-i18n="role.drums">Batería</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SHOWS -->
+    <section class="shows" id="shows">
+        <h2 class="section-title" data-i18n="shows.title">Shows</h2>
+        <div class="shows-grid">
+            <!-- EPICA -->
+            <a href="tour-epica.html" class="show-flyer">
+                <img src="https://i.ibb.co/cBRzNDD/EPICA-MTY-FLYER.png" alt="Tour con Epica 2025">
+                <div class="show-flyer-icon">
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+                <div class="show-flyer-overlay">
+                    <h3 class="show-flyer-title" data-i18n="shows.epica.title">Tour con Epica</h3>
+                    <p class="show-flyer-year" data-i18n="shows.epica.year">Mayo 2025</p>
+                </div>
+            </a>
+
+            <!-- VISIONS -->
+            <a href="tour-visions.html" class="show-flyer">
+                <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769202855/IMG_1892.JPG_cerjvj.jpg" alt="Tour con Visions of Atlantis 2023">
+                <div class="show-flyer-icon">
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+                <div class="show-flyer-overlay">
+                    <h3 class="show-flyer-title" data-i18n="shows.visions.title">Tour con Visions of Atlantis</h3>
+                    <p class="show-flyer-year" data-i18n="shows.visions.year">2023</p>
+                </div>
+            </a>
+
+            <!-- VOICE FOR THE VOICELESS -->
+            <a href="tour-voice.html" class="show-flyer">
+                <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769184542/93D52A23-6EB9-4CC2-9D2C-A871EB4D5905_1_105_c_cafse3.jpg" alt="Voice For The Voiceless">
+                <div class="show-flyer-icon">
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+                <div class="show-flyer-overlay">
+                    <h3 class="show-flyer-title" data-i18n="shows.voice.title">Voice For The Voiceless</h3>
+                    <p class="show-flyer-year" data-i18n="shows.voice.year">Presentación 2024</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contacto">
+        <div class="footer-logo">
+            <a href="#inicio"><img src="https://i.ibb.co/20L06zVc/Logo-SNM-01-2.png" alt="She No More"></a>
+        </div>
+        <div class="footer-social">
+            <a href="https://www.tiktok.com/@shenomoreofficial" target="_blank" title="TikTok"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+            <a href="https://www.instagram.com/shenomoreofficial/" target="_blank" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+            <a href="https://www.facebook.com/shenomoreofficial" target="_blank" title="Facebook"><svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
+            <a href="https://www.youtube.com/shenomore" target="_blank" title="YouTube"><svg viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></a>
+            <a href="https://open.spotify.com/artist/1BjEJmlPmGmzYfMKGueoMl" target="_blank" title="Spotify"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a>
+        </div>
+        <p class="footer-contact" data-i18n="footer.contact">Contacto: <a href="mailto:shenomore@lafraternidad.com.mx">shenomore@lafraternidad.com.mx</a></p>
+        <p class="footer-copyright" data-i18n="footer.copyright">© 2025 She No More. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- POPUP SUSCRIPCIÓN -->
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup">
+            <button class="popup-close" id="popupClose">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            <img src="https://i.ibb.co/DDhvcFM7/Logo-SNM-Emblema.png" alt="She No More" class="popup-logo">
+            <p class="popup-text" data-i18n="popup.text">Suscríbete para recibir noticias exclusivas, lanzamientos y acceso anticipado a merchandise.</p>
+            <form class="popup-form" id="subscribeForm">
+                <input type="email" class="popup-input" data-i18n-placeholder="popup.placeholder" placeholder="Tu correo electrónico" required>
+                <button type="submit" class="popup-btn" data-i18n="popup.btn">Suscribirme</button>
+            </form>
+            <button class="popup-skip" id="popupSkip" data-i18n="popup.skip">No gracias, continuar</button>
+        </div>
+    </div>
+
+    <script>
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 50));
+
+        const menuToggle = document.getElementById('menuToggle');
+        const navPanel = document.getElementById('navPanel');
+        const navOverlay = document.getElementById('navOverlay');
+        const navClose = document.getElementById('navClose');
+
+        function openMenu() {
+            navPanel.classList.add('active');
+            navOverlay.classList.add('active');
+            menuToggle.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            navPanel.classList.remove('active');
+            navOverlay.classList.remove('active');
+            menuToggle.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        menuToggle.addEventListener('click', () => navPanel.classList.contains('active') ? closeMenu() : openMenu());
+        navClose.addEventListener('click', closeMenu);
+        navOverlay.addEventListener('click', closeMenu);
+        document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', closeMenu));
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && navPanel.classList.contains('active')) closeMenu(); });
+
+        // Popup suscripción
+        const popupOverlay = document.getElementById('popupOverlay');
+        const popupClose = document.getElementById('popupClose');
+        const popupSkip = document.getElementById('popupSkip');
+        const subscribeForm = document.getElementById('subscribeForm');
+
+        function showPopup() {
+            if (!localStorage.getItem('snm_popup_closed')) {
+                popupOverlay.classList.add('active');
+            }
+        }
+
+        function hidePopup() {
+            popupOverlay.classList.remove('active');
+            localStorage.setItem('snm_popup_closed', 'true');
+        }
+
+        // Mostrar popup después de 3 segundos
+        setTimeout(showPopup, 3000);
+
+        popupClose.addEventListener('click', hidePopup);
+        popupSkip.addEventListener('click', hidePopup);
+
+        subscribeForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = subscribeForm.querySelector('input').value;
+            // Aquí puedes agregar la lógica para enviar el email
+            alert(currentLang === 'es' ? '¡Gracias por suscribirte! Te mantendremos informado.' : 'Thanks for subscribing! We\'ll keep you informed.');
+            hidePopup();
+        });
+
+        // Sistema de traducción
+        const translations = {
+            es: {
+                'nav.inicio': 'Inicio',
+                'nav.nosotros': 'Nosotros',
+                'nav.discografia': 'Discografía',
+                'nav.singles': 'Singles',
+                'nav.banda': 'Banda',
+                'nav.shows': 'Shows',
+                'nav.merch': 'Merch',
+                'nav.contacto': 'Contacto',
+                'hero.tagline': 'Escucha Buscaré',
+                'hero.btn1': 'Compra/Stream',
+                'hero.btn2': "Ver 'Burn It All'",
+                'hero.btn3': "Ver 'Resurgir ft. Mark Jansen'",
+                'hero.btn4': 'Merch',
+                'about.title': 'Nosotros',
+                'about.text1': 'She No More es una banda que fusiona hard rock, metal sinfónico y melódico con toques de electro pop. Su música no solo busca impactar: busca despertar. A través de letras que exploran las heridas del mundo —desde la injusticia social y el colapso ambiental, hasta la violencia, la guerra, el abuso y la salud mental— se han convertido en una voz activa dentro y fuera del escenario.',
+                'about.text2': 'Tras acompañar a Visions of Atlantis y Epica en sus giras por México, y presentar su álbum Voice For The Voiceless, la banda reafirma su misión: ser la voz de quienes no la tienen. 2026 marca su año de consolidación.',
+                'about.highlight': 'Únete a la lucha. Suma tu voz.',
+                'disco.title': 'Discografía',
+                'disco.album': 'Álbum',
+                'singles.title': 'Singles',
+                'shows.title': 'Shows',
+                'shows.epica.title': 'Tour con Epica',
+                'shows.epica.year': 'Mayo 2025',
+                'shows.visions.title': 'Tour con Visions of Atlantis',
+                'shows.visions.year': '2023',
+                'shows.voice.title': 'Voice For The Voiceless',
+                'shows.voice.year': 'Presentación 2024',
+                'footer.contact': 'Contacto: <a href="mailto:shenomore@lafraternidad.com.mx">shenomore@lafraternidad.com.mx</a>',
+                'footer.copyright': '© 2025 She No More. Todos los derechos reservados.',
+                'popup.text': 'Suscríbete para recibir noticias exclusivas, lanzamientos y acceso anticipado a merchandise.',
+                'popup.placeholder': 'Tu correo electrónico',
+                'popup.btn': 'Suscribirme',
+                'popup.skip': 'No gracias, continuar',
+                'banda.title': 'Banda',
+                'role.vocals': 'Voz',
+                'role.guitar': 'Guitarra',
+                'role.bass': 'Bajo',
+                'role.drums': 'Batería'
+            },
+            en: {
+                'nav.inicio': 'Home',
+                'nav.nosotros': 'About',
+                'nav.discografia': 'Discography',
+                'nav.singles': 'Singles',
+                'nav.banda': 'Band',
+                'nav.shows': 'Shows',
+                'nav.merch': 'Merch',
+                'nav.contacto': 'Contact',
+                'hero.tagline': 'Listen to Buscaré',
+                'hero.btn1': 'Buy/Stream',
+                'hero.btn2': "Watch 'Burn It All'",
+                'hero.btn3': "Watch 'Resurgir ft. Mark Jansen'",
+                'hero.btn4': 'Merch',
+                'about.title': 'About Us',
+                'about.text1': 'She No More is a band that fuses hard rock, symphonic and melodic metal with subtle shades of electro pop. Their music is not meant merely to impact — it is meant to awaken. Through lyrics that reflect the world\'s open wounds — from social injustice and environmental collapse, to war, abuse, violence, and mental health — they have become an active voice on stage and beyond it.',
+                'about.text2': 'After touring Mexico alongside Visions of Atlantis and Epica, and unveiling their album Voice For The Voiceless, the band reaffirms its purpose: to be the voice for the voiceless. 2026 marks their year of consolidation.',
+                'about.highlight': 'Join the fight. Raise your voice.',
+                'disco.title': 'Discography',
+                'disco.album': 'Album',
+                'singles.title': 'Singles',
+                'shows.title': 'Shows',
+                'shows.epica.title': 'Epica Tour',
+                'shows.epica.year': 'May 2025',
+                'shows.visions.title': 'Visions of Atlantis Tour',
+                'shows.visions.year': '2023',
+                'shows.voice.title': 'Voice For The Voiceless',
+                'shows.voice.year': 'Release 2024',
+                'footer.contact': 'Contact: <a href="mailto:shenomore@lafraternidad.com.mx">shenomore@lafraternidad.com.mx</a>',
+                'footer.copyright': '© 2025 She No More. All rights reserved.',
+                'popup.text': 'Subscribe to receive exclusive news, releases and early access to merchandise.',
+                'popup.placeholder': 'Your email address',
+                'popup.btn': 'Subscribe',
+                'popup.skip': 'No thanks, continue',
+                'banda.title': 'Band',
+                'role.vocals': 'Vocals',
+                'role.guitar': 'Guitar',
+                'role.bass': 'Bass',
+                'role.drums': 'Drums'
+            }
+        };
+
+        let currentLang = localStorage.getItem('snm_lang') || 'es';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('snm_lang', lang);
+            
+            // Actualizar botones
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Traducir elementos con data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            // Traducir placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.dataset.i18nPlaceholder;
+                if (translations[lang][key]) {
+                    el.placeholder = translations[lang][key];
+                }
+            });
+        }
+
+        // Event listeners para botones de idioma
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+        });
+
+        // Inicializar idioma
+        setLanguage(currentLang);
+    </script>
+</body>
+</html>

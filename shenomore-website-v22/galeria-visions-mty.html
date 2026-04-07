@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visions of Atlantis Monterrey - Galería - She No More</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/KjRZ2gzD/Logo-SNM-Emblema-2.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple-dark: #1a0a1f;
+            --purple-deep: #2d1b36;
+            --purple-main: #6b2d5b;
+            --purple-accent: #9b4d8b;
+            --purple-light: #c77dbb;
+            --white: #f5f0f5;
+            --gray: #a89fa8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: linear-gradient(180deg, var(--purple-dark) 0%, #0d0510 100%);
+            color: var(--white);
+            min-height: 100vh;
+        }
+
+        header {
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--purple-main);
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+        }
+        .back-btn:hover { color: var(--purple-light); }
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            fill: none;
+        }
+
+        .header-logo img {
+            height: 50px;
+            filter: drop-shadow(0 0 15px var(--purple-accent));
+        }
+
+        .header-spacer { width: 150px; }
+
+        .lang-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .lang-btn {
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .lang-btn:hover { color: var(--white); }
+        .lang-btn.active { color: var(--purple-light); }
+
+        .gallery-hero {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-bottom: 1px solid var(--purple-main);
+        }
+
+        .gallery-hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 30px var(--purple-accent);
+        }
+
+        .gallery-hero .tagline {
+            color: var(--purple-light);
+            font-size: 1.1rem;
+            letter-spacing: 0.15em;
+        }
+
+        .gallery-hero .venue {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-top: 0.3rem;
+        }
+
+        .gallery-section { padding: 3rem 2rem; }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid var(--purple-main);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            border-color: var(--purple-light);
+            transform: scale(1.03);
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(107, 45, 91, 0.5);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img { transform: scale(1.1); }
+
+        .gallery-item.featured {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .gallery-footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--purple-main);
+        }
+
+        .back-to-tour {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: 2px solid var(--purple-accent);
+            border-radius: 50px;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .back-to-tour:hover { background: var(--purple-accent); }
+        .back-to-tour svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            fill: none;
+        }
+
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 0 50px rgba(155, 77, 139, 0.3);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: var(--purple-accent);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .lightbox-close:hover { background: var(--purple-light); }
+        .lightbox-close svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--white);
+        }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(107, 45, 91, 0.5);
+            border: none;
+            color: var(--white);
+            cursor: pointer;
+            padding: 1rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        .lightbox-nav:hover { background: var(--purple-accent); }
+        .lightbox-nav svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            fill: none;
+        }
+        .lightbox-prev { left: 1.5rem; }
+        .lightbox-next { right: 1.5rem; }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 900px) {
+            .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+            .gallery-item.featured {
+                grid-column: span 2;
+                grid-row: span 2;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-item.featured {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+            .gallery-hero h1 { font-size: 1.8rem; }
+            header { padding: 1rem; }
+            .header-spacer { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="tour-visions.html" class="back-btn">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <span data-i18n="nav.back">Volver al Tour</span>
+        </a>
+        <div class="header-logo">
+            <a href="index.html"><img src="https://i.ibb.co/DDhvcFM7/Logo-SNM-Emblema.png" alt="She No More"></a>
+        </div>
+        <div class="lang-toggle">
+            <button class="lang-btn active" data-lang="es">ES</button>
+            <span style="color: var(--gray);">|</span>
+            <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+    </header>
+
+    <section class="gallery-hero">
+        <h1>VISIONS OF ATLANTIS</h1>
+        <p class="tagline" data-i18n="gallery.tagline">Monterrey • 2023</p>
+        <p class="venue">Café Iguana</p>
+    </section>
+
+    <section class="gallery-section">
+        <div class="gallery-grid">
+            <div class="gallery-item featured" onclick="openLightbox(0)">
+                <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769530223/5B2E7419-AFE4-4AD3-A60A-51565AA5D0DF_4_5005_c_dnfpjk.jpg" alt="Visions of Atlantis Monterrey">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(1)">
+                <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769530222/BD977EE0-3090-4749-BC40-5C2F2F62A649_1_105_c_kgmoqy.jpg" alt="Visions of Atlantis Monterrey">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(2)">
+                <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769530228/5FE246C3-E1F8-47B8-8CA1-3EA7D0B09141_1_105_c_aypkz8.jpg" alt="Visions of Atlantis Monterrey">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(3)">
+                <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769530226/06A4F6D5-B00C-4D68-A000-C5A5D89CB599_4_5005_c_bgdhp8.jpg" alt="Visions of Atlantis Monterrey">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(4)">
+                <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769530347/27B4F40E-D299-4333-A142-4070968716C3_4_5005_c_ny5nxr.jpg" alt="Visions of Atlantis Monterrey">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(5)">
+                <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769530345/27CB520A-A168-46EF-97E0-BEC48539BBBE_4_5005_c_x4ia7e.jpg" alt="Visions of Atlantis Monterrey">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(6)">
+                <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769530352/41D1C8DF-B949-4F40-B55D-960494EBC021_4_5005_c_cyohsm.jpg" alt="Visions of Atlantis Monterrey">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(7)">
+                <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769530350/27CD34A0-46CD-41EF-9442-43739EA4F510_4_5005_c_xccv5w.jpg" alt="Visions of Atlantis Monterrey">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(8)">
+                <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769530395/B4BC9ECD-1A2B-4B53-AB0F-311592FD9110_4_5005_c_wtobeu.jpg" alt="Visions of Atlantis Monterrey">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(9)">
+                <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769530391/61A849C1-6411-4776-8A6D-0725A254DA32_1_105_c_zxmyz4.jpg" alt="Visions of Atlantis Monterrey">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(10)">
+                <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769530398/AC53CBD5-2980-4DCB-96B9-5779CF449A5B_4_5005_c_wms0jn.jpg" alt="Visions of Atlantis Monterrey">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(11)">
+                <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769530573/A5F7DE0B-AB54-4596-B16B-4D7FE407167A_4_5005_c_myxzdk.jpg" alt="Visions of Atlantis Monterrey">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(12)">
+                <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769530570/BC2E0560-816D-4486-9A76-139BB182AB46_4_5005_c_ek3t1y.jpg" alt="Visions of Atlantis Monterrey">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(13)">
+                <img src="https://res.cloudinary.com/diobgaxfl/image/upload/v1769530400/739252B7-6925-4015-AB7A-213C7992065E_4_5005_c_r4qnuy.jpg" alt="Visions of Atlantis Monterrey">
+            </div>
+        </div>
+    </section>
+
+    <footer class="gallery-footer">
+        <a href="tour-visions.html" class="back-to-tour">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Volver al Tour
+        </a>
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <button class="lightbox-nav lightbox-prev" onclick="changeImage(-1)">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <img src="" alt="Visions of Atlantis Monterrey" class="lightbox-img" id="lightbox-img">
+        <button class="lightbox-nav lightbox-next" onclick="changeImage(1)">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <script>
+        const images = [
+            'https://res.cloudinary.com/diobgaxfl/image/upload/v1769530223/5B2E7419-AFE4-4AD3-A60A-51565AA5D0DF_4_5005_c_dnfpjk.jpg',
+            'https://res.cloudinary.com/diobgaxfl/image/upload/v1769530222/BD977EE0-3090-4749-BC40-5C2F2F62A649_1_105_c_kgmoqy.jpg',
+            'https://res.cloudinary.com/diobgaxfl/image/upload/v1769530228/5FE246C3-E1F8-47B8-8CA1-3EA7D0B09141_1_105_c_aypkz8.jpg',
+            'https://res.cloudinary.com/diobgaxfl/image/upload/v1769530226/06A4F6D5-B00C-4D68-A000-C5A5D89CB599_4_5005_c_bgdhp8.jpg',
+            'https://res.cloudinary.com/diobgaxfl/image/upload/v1769530347/27B4F40E-D299-4333-A142-4070968716C3_4_5005_c_ny5nxr.jpg',
+            'https://res.cloudinary.com/diobgaxfl/image/upload/v1769530345/27CB520A-A168-46EF-97E0-BEC48539BBBE_4_5005_c_x4ia7e.jpg',
+            'https://res.cloudinary.com/diobgaxfl/image/upload/v1769530352/41D1C8DF-B949-4F40-B55D-960494EBC021_4_5005_c_cyohsm.jpg',
+            'https://res.cloudinary.com/diobgaxfl/image/upload/v1769530350/27CD34A0-46CD-41EF-9442-43739EA4F510_4_5005_c_xccv5w.jpg',
+            'https://res.cloudinary.com/diobgaxfl/image/upload/v1769530395/B4BC9ECD-1A2B-4B53-AB0F-311592FD9110_4_5005_c_wtobeu.jpg',
+            'https://res.cloudinary.com/diobgaxfl/image/upload/v1769530391/61A849C1-6411-4776-8A6D-0725A254DA32_1_105_c_zxmyz4.jpg',
+            'https://res.cloudinary.com/diobgaxfl/image/upload/v1769530398/AC53CBD5-2980-4DCB-96B9-5779CF449A5B_4_5005_c_wms0jn.jpg',
+            'https://res.cloudinary.com/diobgaxfl/image/upload/v1769530573/A5F7DE0B-AB54-4596-B16B-4D7FE407167A_4_5005_c_myxzdk.jpg',
+            'https://res.cloudinary.com/diobgaxfl/image/upload/v1769530570/BC2E0560-816D-4486-9A76-139BB182AB46_4_5005_c_ek3t1y.jpg',
+            'https://res.cloudinary.com/diobgaxfl/image/upload/v1769530400/739252B7-6925-4015-AB7A-213C7992065E_4_5005_c_r4qnuy.jpg'
+        ];
+        let currentIndex = 0;
+
+        function openLightbox(index) {
+            currentIndex = index;
+            document.getElementById('lightbox-img').src = images[currentIndex];
+            document.getElementById('lightbox-counter').textContent = `${currentIndex + 1} / ${images.length}`;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function changeImage(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) currentIndex = images.length - 1;
+            if (currentIndex >= images.length) currentIndex = 0;
+            document.getElementById('lightbox-img').src = images[currentIndex];
+            document.getElementById('lightbox-counter').textContent = `${currentIndex + 1} / ${images.length}`;
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') changeImage(-1);
+            if (e.key === 'ArrowRight') changeImage(1);
+        });
+
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('lightbox')) closeLightbox();
+        });
+
+        // Traducciones
+        const translations = {
+            es: { 
+                'nav.back': 'Volver al Tour',
+                'gallery.tagline': 'Monterrey • 2023'
+            },
+            en: { 
+                'nav.back': 'Back to Tour',
+                'gallery.tagline': 'Monterrey • 2023'
+            }
+        };
+
+        let currentLang = localStorage.getItem('snm_lang') || 'es';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('snm_lang', lang);
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (translations[lang][key]) el.innerHTML = translations[lang][key];
+            });
+        }
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+        });
+
+        setLanguage(currentLang);
+    </script>
+</body>
+</html>
